@@ -1,0 +1,15 @@
+//
+//  AppBrowser-Prefix.pch
+//  AppBrowser
+//
+//  Created by little2s on 2016/12/16.
+//  Copyright © 2016年 little2s. All rights reserved.
+//
+
+#ifndef AppBrowser_Prefix_pch
+#define AppBrowser_Prefix_pch
+
+#import <ReactiveObjC/ReactiveObjC.h>
+#import <libextobjc/extobjc.h>
+
+#endif
