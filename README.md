@@ -1,6 +1,16 @@
+<img src="https://raw.githubusercontent.com/little2s/AppBrowser/master/AppBrowser/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png" width="120" height="120" />
+
 # AppBrowser
 
 AppBrowser help you overview application information on your iPhone, it can also help your lookup information on App Store.
+
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/little2s/AppBrowser/master/screenshots/screenshot-3.png" width="250" height="444" />
+&nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/little2s/AppBrowser/master/screenshots/screenshot-1.png" width="250" height="444" />
+&nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/little2s/AppBrowser/master/screenshots/screenshot-4.png" width="250" height="444" />
 
 ## Installation Instructions
 
