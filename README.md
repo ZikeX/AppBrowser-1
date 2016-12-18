@@ -18,7 +18,7 @@ You can use Xcode 8 to install AppBrowser on your iPhone using just your Apple I
 
 All you need to do is:
 
-1. Install [Xcode 8](https://developer.apple.com/xcode/download/)
+1. Install [Xcode 8](https://itunes.apple.com/cn/app/xcode/id497799835?mt=12)
 1. Download the [AppBrowser Source Code](https://github.com/little2s/AppBrowser)
 1. Install dependencies with [CocoaPods](https://cocoapods.org)
 1. Open "AppBrowser.xcworkspace" in Xcode
