@@ -51,6 +51,7 @@
         id vendorName = [self valueForProxy:proxy selector:@selector(vendorName)];
         id applicationType = [self valueForProxy:proxy selector:@selector(applicationType)];
         id sdkVersion = [self valueForProxy:proxy selector:@selector(sdkVersion)];
+        id shortVersionString = [self valueForProxy:proxy selector:@selector(shortVersionString)];
 #pragma clang diagnostic pop
         
         _dictionary = @{
@@ -82,7 +83,8 @@
             @"groupContainers": groupContainers,
             @"vendorName": vendorName,
             @"applicationType": applicationType,
-            @"sdkVersion": sdkVersion
+            @"sdkVersion": sdkVersion,
+            @"shortVersionString": shortVersionString
         };
         
     }
@@ -148,7 +150,8 @@
         @"groupContainers",
         @"vendorName",
         @"applicationType",
-        @"sdkVersion"
+        @"sdkVersion",
+        @"shortVersionString"
     ];
 }
 
@@ -156,10 +159,11 @@
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"LocalAppInfoWhiteList"] ?: @[
         @"applicationIdentifier",
-        @"bundleVersion",
+        @"shortVersionString",
         @"localizedName",
         @"vendorName",
-        @"applicationType"
+        @"applicationType",
+        @"staticDiskUsage"
     ];
 }
 
