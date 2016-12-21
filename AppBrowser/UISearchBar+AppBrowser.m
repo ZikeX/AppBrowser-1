@@ -22,6 +22,11 @@ static void abs_exchangeInstanceMethod(Class aClass, SEL oldSEL, SEL newSEL)
 
 static NSArray *abs_tags;
 
++ (void)load
+{
+    [self abs_notShowCancelButtonForTags:@[@(89757)]];
+}
+
 + (void)abs_notShowCancelButtonForTags:(NSArray *)tags
 {
     static dispatch_once_t onceToken;

@@ -16,18 +16,11 @@
 #import "ABSAppsViewModel.h"
 #import "ABSSettingsViewModel.h"
 
-#import "UISearchBar+AppBrowser.h"
-
 @interface ABSAppDelegate ()
 
 @end
 
 @implementation ABSAppDelegate
-
-+ (void)load
-{
-    [UISearchBar abs_notShowCancelButtonForTags:@[@(89757)]];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
