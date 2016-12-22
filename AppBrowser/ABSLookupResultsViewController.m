@@ -50,8 +50,9 @@
     [self showLoadingView];
     
     @weakify(self);
-    [[self.viewModel
+    [[[self.viewModel
       searchBarSearchButtonClicked:text]
+      deliverOnMainThread]
       subscribeNext:^(NSString *HTMLString) {
           @strongify(self);
           if (HTMLString) {
@@ -66,38 +67,32 @@
 
 - (void)showLoadingView
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.containerView.hidden = NO;
-        self.indicatorView.hidden = NO;
-        self.textLabel.hidden = YES;
-        self.webView.hidden = YES;
-        
-        [self.indicatorView startAnimating];
-    });
+    self.containerView.hidden = NO;
+    self.indicatorView.hidden = NO;
+    self.textLabel.hidden = YES;
+    self.webView.hidden = YES;
+    
+    [self.indicatorView startAnimating];
 }
 
 - (void)showResultsViewWithHTMLString:(NSString *)HTMLString
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.containerView.hidden = NO;
-        self.indicatorView.hidden = YES;
-        self.textLabel.hidden = YES;
-        self.webView.hidden = NO;
-        
-        [self.webView loadHTMLString:HTMLString baseURL:nil];
-    });
+    self.containerView.hidden = NO;
+    self.indicatorView.hidden = YES;
+    self.textLabel.hidden = YES;
+    self.webView.hidden = NO;
+    
+    [self.webView loadHTMLString:HTMLString baseURL:nil];
 }
 
 - (void)showNoResultsViewWithText:(NSString *)text
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.containerView.hidden = NO;
-        self.indicatorView.hidden = YES;
-        self.textLabel.hidden = NO;
-        self.webView.hidden = YES;
-        
-        self.textLabel.text = [NSString stringWithFormat:@"%@ \"%@\"", NSLocalizedString(@"No results for", @""), text];
-    });
+    self.containerView.hidden = NO;
+    self.indicatorView.hidden = YES;
+    self.textLabel.hidden = NO;
+    self.webView.hidden = YES;
+    
+    self.textLabel.text = [NSString stringWithFormat:@"%@ \"%@\"", NSLocalizedString(@"No results for", @""), text];
 }
 
 @end
