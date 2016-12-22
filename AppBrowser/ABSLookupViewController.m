@@ -42,7 +42,7 @@
     self.navigationItem.titleView = self.searchController.searchBar;
     
     @weakify(self);
-    [self.viewModel.updatedContentSignal subscribeNext:^(id x) {
+    [[self.viewModel.updatedContentSignal deliverOnMainThread] subscribeNext:^(id x) {
         @strongify(self);
         [self reloadData];
     }];
@@ -57,29 +57,27 @@
 
 - (void)reloadData
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSInteger count = [self.viewModel numbersOfHistoryButton];
-        if (count > 0) {
-            self.noHistoryView.hidden = YES;
-            self.historyView.hidden = NO;
-            
-            for (UIView *subview in self.stackView.arrangedSubviews) {
-                if ([subview isKindOfClass:[UIButton class]]) {
-                    [self.stackView removeArrangedSubview:subview];
-                }
+    NSInteger count = [self.viewModel numbersOfHistoryButton];
+    if (count > 0) {
+        self.noHistoryView.hidden = YES;
+        self.historyView.hidden = NO;
+        
+        for (UIView *subview in self.stackView.arrangedSubviews) {
+            if ([subview isKindOfClass:[UIButton class]]) {
+                [self.stackView removeArrangedSubview:subview];
             }
-            
-            for (NSInteger i = 0; i < count; i++) {
-                NSString *title = [self.viewModel titleForHistoryButtonAtIndex:i];
-                UIButton *button = [self buttonForTitle:title index:i];
-                [self.stackView addArrangedSubview:button];
-            }
-            
-        } else {
-            self.noHistoryView.hidden = NO;
-            self.historyView.hidden = YES;
         }
-    });
+        
+        for (NSInteger i = 0; i < count; i++) {
+            NSString *title = [self.viewModel titleForHistoryButtonAtIndex:i];
+            UIButton *button = [self buttonForTitle:title index:i];
+            [self.stackView addArrangedSubview:button];
+        }
+        
+    } else {
+        self.noHistoryView.hidden = NO;
+        self.historyView.hidden = YES;
+    }
 }
 
 - (UIButton *)buttonForTitle:(NSString *)title index:(NSInteger)index
