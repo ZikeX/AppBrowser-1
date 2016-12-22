@@ -10,13 +10,14 @@
 
 @interface ABSSettingsViewModel : RVMViewModel
 
-@property (assign, nonatomic) BOOL systemAppsSwitchOn;
+@property (assign, nonatomic) BOOL isSystemAppsOn;
+
+- (void)showSystemApp:(BOOL)on;
 
 - (void)clearLookupHistory;
 
 - (NSString *)clearHistoryActionSheetMessage;
 - (NSString *)clearActionTittle;
 - (NSString *)canceActionlTitle;
-
 
 @end

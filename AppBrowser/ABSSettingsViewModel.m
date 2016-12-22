@@ -14,11 +14,15 @@
 {
     self = [super init];
     if (self) {
-        self.systemAppsSwitchOn = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowSystemApps"];
-        
-        RACChannelTo(self, systemAppsSwitchOn, @NO) = [[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"ShowSystemApps"];
+        self.isSystemAppsOn = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowSystemApps"];
     }
     return self;
+}
+
+- (void)showSystemApp:(BOOL)on
+{
+    [[NSUserDefaults standardUserDefaults] setBool:on forKey:@"ShowSystemApps"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)clearLookupHistory

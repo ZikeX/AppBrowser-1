@@ -23,9 +23,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.systemAppsSwitch.on = self.viewModel.systemAppsSwitchOn;
+    self.systemAppsSwitch.on = self.viewModel.isSystemAppsOn;
     
-    RACChannelTo(self.viewModel, systemAppsSwitchOn) = [self.systemAppsSwitch rac_newOnChannel];
+    @weakify(self);
+    [self.systemAppsSwitch.rac_newOnChannel subscribeNext:^(id x) {
+        @strongify(self);
+        [self.viewModel showSystemApp:[x boolValue]];
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
