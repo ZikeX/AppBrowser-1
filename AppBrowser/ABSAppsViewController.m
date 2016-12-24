@@ -26,6 +26,9 @@
 {
     [super viewDidLoad];
     
+    // http://stackoverflow.com/questions/30159565/ios7-8-translucent-navigationbar-top-right-corner-of-the-black
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];
+    
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.searchResultsUpdater = self;
@@ -69,6 +72,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ABSAppViewController *appViewController = [storyboard instantiateViewControllerWithIdentifier:@"ABSAppViewController"];
     appViewController.viewModel = [self.viewModel appViewModelAtIndexPath:indexPath isSearchActive:self.searchController.active];
+    appViewController.hidesBottomBarWhenPushed = YES;
     [self showViewController:appViewController sender:nil];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
