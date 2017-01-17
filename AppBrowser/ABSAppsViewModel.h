@@ -16,7 +16,8 @@
 @property (strong, nonatomic, readonly) RACCommand *refreshCommand;
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section isSearchActive:(BOOL)active;
-- (NSString *)textAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active;
+- (NSString *)nameAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active;
+- (RACSignal *)iconImageAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active;
 
 - (ABSAppViewModel *)appViewModelAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active;
 

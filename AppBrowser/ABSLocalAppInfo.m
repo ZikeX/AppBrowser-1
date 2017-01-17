@@ -86,7 +86,6 @@
             @"sdkVersion": sdkVersion,
             @"shortVersionString": shortVersionString
         };
-        
     }
     return self;
 }
@@ -99,6 +98,30 @@
 - (NSString *)localizedName
 {
     return self.dictionary[@"localizedName"];
+}
+
+- (UIImage *)iconImage
+{
+    id target = UIImage.class;
+    SEL sel = NSSelectorFromString(@"_applicationIconImageForBundleIdentifier:format:scale:");
+    NSMethodSignature *signature = [target methodSignatureForSelector:sel];
+    NSString *arg2 = self.applicationIdentifier;
+    NSString *arg3 = @"";
+    CGFloat arg4 = [UIScreen mainScreen].scale;
+    
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    invocation.target = target;
+    invocation.selector = sel;
+    [invocation setArgument:&arg2 atIndex:2];
+    [invocation setArgument:&arg3 atIndex:3];
+    [invocation setArgument:&arg4 atIndex:4];
+    
+    [invocation invoke];
+    
+    __unsafe_unretained id returnValue;
+    [invocation getReturnValue:&returnValue];
+    
+    return (UIImage *)returnValue;
 }
 
 - (id)valueForProxy:(id)proxy selector:(SEL)sel
@@ -172,6 +195,5 @@
     [[NSUserDefaults standardUserDefaults] setObject:keys forKey:@"LocalAppInfoWhiteList"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
 
 @end

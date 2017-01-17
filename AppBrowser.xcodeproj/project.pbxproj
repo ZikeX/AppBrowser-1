@@ -30,6 +30,7 @@
 		E083D3161E0439E500700B56 /* ABSAppViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E083D3151E0439E500700B56 /* ABSAppViewModel.m */; };
 		E083D3191E04D83A00700B56 /* ABSSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E083D3181E04D83A00700B56 /* ABSSettingsViewController.m */; };
 		E083D31C1E04D84F00700B56 /* ABSSettingsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E083D31B1E04D84F00700B56 /* ABSSettingsViewModel.m */; };
+		E08ECB4A1E2E3A8F00A8ED07 /* ABSAppCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E08ECB491E2E3A8F00A8ED07 /* ABSAppCell.m */; };
 		E0E4F7DA1E0545DF00650691 /* ABSFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E4F7D91E0545DF00650691 /* ABSFilterViewController.m */; };
 		E0E4F7DD1E0545FE00650691 /* ABSFilterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E4F7DC1E0545FE00650691 /* ABSFilterViewModel.m */; };
 		E0E4F7E11E058A0C00650691 /* footer.html in Resources */ = {isa = PBXBuildFile; fileRef = E0E4F7DF1E058A0C00650691 /* footer.html */; };
@@ -101,6 +102,8 @@
 		E083D3181E04D83A00700B56 /* ABSSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSSettingsViewController.m; sourceTree = "<group>"; };
 		E083D31A1E04D84F00700B56 /* ABSSettingsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSSettingsViewModel.h; sourceTree = "<group>"; };
 		E083D31B1E04D84F00700B56 /* ABSSettingsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSSettingsViewModel.m; sourceTree = "<group>"; };
+		E08ECB481E2E3A8F00A8ED07 /* ABSAppCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSAppCell.h; sourceTree = "<group>"; };
+		E08ECB491E2E3A8F00A8ED07 /* ABSAppCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSAppCell.m; sourceTree = "<group>"; };
 		E0CC8EA221449DF4CC2E5715 /* Pods-AppBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBrowser/Pods-AppBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		E0E4F7D81E0545DF00650691 /* ABSFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSFilterViewController.h; sourceTree = "<group>"; };
 		E0E4F7D91E0545DF00650691 /* ABSFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSFilterViewController.m; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				E083D2F01E03C81300700B56 /* ABSLookupResultsViewController.m */,
 				E083D3021E03E7CC00700B56 /* ABSAppsViewController.h */,
 				E083D3031E03E7CC00700B56 /* ABSAppsViewController.m */,
+				E08ECB481E2E3A8F00A8ED07 /* ABSAppCell.h */,
+				E08ECB491E2E3A8F00A8ED07 /* ABSAppCell.m */,
 				E083D3111E0439CE00700B56 /* ABSAppViewController.h */,
 				E083D3121E0439CE00700B56 /* ABSAppViewController.m */,
 				E083D3171E04D83A00700B56 /* ABSSettingsViewController.h */,
@@ -487,7 +492,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -502,6 +507,7 @@
 				E083D2FA1E03D7E700700B56 /* ABSItunesAppInfo.m in Sources */,
 				E083D2B21E038CCF00700B56 /* ABSAppDelegate.m in Sources */,
 				E083D3011E03DA5E00700B56 /* UISearchBar+AppBrowser.m in Sources */,
+				E08ECB4A1E2E3A8F00A8ED07 /* ABSAppCell.m in Sources */,
 				E083D3161E0439E500700B56 /* ABSAppViewModel.m in Sources */,
 				E083D2AF1E038CCF00700B56 /* main.m in Sources */,
 				E083D3041E03E7CC00700B56 /* ABSAppsViewController.m in Sources */,

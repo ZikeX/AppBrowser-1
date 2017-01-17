@@ -8,7 +8,7 @@
 
 #import "ABSAppsViewController.h"
 #import "ABSAppViewController.h"
-
+#import "ABSAppCell.h"
 #import "ABSAppsViewModel.h"
 #import "ABSAppViewModel.h"
 
@@ -35,6 +35,7 @@
     self.definesPresentationContext = YES;
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.tableView.contentOffset = CGPointMake(0, 44);
+    self.tableView.tableFooterView = [UIView new];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.rac_command = self.viewModel.refreshCommand;
@@ -62,8 +63,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ABSAppCell" forIndexPath:indexPath];
-    cell.textLabel.text = [self.viewModel textAtIndexPath:indexPath isSearchActive:self.searchController.active];
+    ABSAppCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ABSAppCell" forIndexPath:indexPath];
+    cell.nameLabel.text = [self.viewModel nameAtIndexPath:indexPath isSearchActive:self.searchController.active];
+    RAC(cell.iconImageView, image) = [self.viewModel iconImageAtIndexPath:indexPath isSearchActive:self.searchController.active];
     return cell;
 }
 

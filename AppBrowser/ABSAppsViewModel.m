@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSArray *appInfos;
 @property (strong, nonatomic) NSArray *searchedAppInfos;
 
+@property (strong, nonatomic) NSCache *imageCache;
+
 @end
 
 @implementation ABSAppsViewModel
@@ -25,6 +27,9 @@
 {
     self = [super init];
     if (self) {
+        _imageCache = [NSCache new];
+        _imageCache.countLimit = 500;
+        
         self.updatedContentSignal = [[RACSubject subject] setNameWithFormat:@"-updatedContentSignal: %@", self];
         
         @weakify(self)
@@ -54,10 +59,41 @@
     return active ? self.searchedAppInfos.count : self.appInfos.count;
 }
 
-- (NSString *)textAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active
+- (NSString *)nameAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active
 {
     ABSLocalAppInfo *appInfo = active ? self.searchedAppInfos[indexPath.row] : self.appInfos[indexPath.row];
     return appInfo.localizedName;
+}
+
+- (RACSignal *)iconImageAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active;
+{
+    ABSLocalAppInfo *appInfo = active ? self.searchedAppInfos[indexPath.row] : self.appInfos[indexPath.row];
+
+    NSCache *cache = self.imageCache;
+    NSString *key = appInfo.applicationIdentifier;
+    
+    return [[[RACSignal
+             createSignal:^(id<RACSubscriber> subscriber) {
+                 __block UIImage *cachedImage = [cache objectForKey:key];
+                 if (cachedImage) {
+                     [subscriber sendNext:cachedImage];
+                     [subscriber sendCompleted];
+                 } else {
+                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                         cachedImage = appInfo.iconImage;
+                         [cache setObject:cachedImage forKey:key];
+                                                  
+                         [subscriber sendNext:cachedImage];
+                         [subscriber sendCompleted];
+                     });
+                 }
+                 
+                 return [RACDisposable disposableWithBlock:^{
+                     // pass
+                 }];
+             }]
+            setNameWithFormat:@"+abs_iconImageAtIndexPath:%@ isSearchActive:%@", indexPath, @(active)]
+            deliverOnMainThread];
 }
 
 - (ABSAppViewModel *)appViewModelAtIndexPath:(NSIndexPath *)indexPath isSearchActive:(BOOL)active

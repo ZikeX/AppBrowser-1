@@ -6,7 +6,7 @@
 //  Copyright © 2016年 little2s. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ABSLocalAppInfo : NSObject
 
@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic, readonly) NSString *applicationIdentifier;
 @property (strong, nonatomic, readonly) NSString *localizedName;
+@property (strong, nonatomic, readonly) UIImage *iconImage;
 
 - (instancetype)initWithAppProxy:(id)proxy;
 
