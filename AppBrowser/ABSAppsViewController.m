@@ -65,7 +65,7 @@
 {
     ABSAppCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ABSAppCell" forIndexPath:indexPath];
     cell.nameLabel.text = [self.viewModel nameAtIndexPath:indexPath isSearchActive:self.searchController.active];
-    RAC(cell.iconImageView, image) = [self.viewModel iconImageAtIndexPath:indexPath isSearchActive:self.searchController.active];
+    RAC(cell.iconImageView, image) = [[self.viewModel iconImageAtIndexPath:indexPath isSearchActive:self.searchController.active] takeUntil:cell.rac_prepareForReuseSignal];
     return cell;
 }
 

@@ -428,6 +428,7 @@
                                     <constraints>
                                         <constraint firstItem="FtM-YH-AO2" firstAttribute="leading" secondItem="8cB-fD-5Mj" secondAttribute="leading" constant="59" id="GGe-I7-bbg"/>
                                         <constraint firstItem="c0O-9i-RFd" firstAttribute="centerY" secondItem="8cB-fD-5Mj" secondAttribute="centerY" id="JSJ-yh-VKi"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FtM-YH-AO2" secondAttribute="trailing" constant="15" id="eJz-aX-v2Y"/>
                                         <constraint firstItem="c0O-9i-RFd" firstAttribute="leading" secondItem="8cB-fD-5Mj" secondAttribute="leading" constant="15" id="fkz-cl-WKr"/>
                                         <constraint firstItem="FtM-YH-AO2" firstAttribute="centerY" secondItem="8cB-fD-5Mj" secondAttribute="centerY" id="lyJ-BS-Yzw"/>
                                     </constraints>
