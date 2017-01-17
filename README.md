@@ -29,7 +29,7 @@ All you need to do is:
 
 ## Resource
 
-All icons are form [Icons8](https://icons8.com), thanks to their great work.
+All icons are from [Icons8](https://icons8.com), thanks to their great work.
 
 ## License
 
