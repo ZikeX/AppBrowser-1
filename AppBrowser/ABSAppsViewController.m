@@ -80,6 +80,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return !(tableView.isTracking || tableView.isDragging || tableView.isDecelerating);
+}
+
 #pragma mark - UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
