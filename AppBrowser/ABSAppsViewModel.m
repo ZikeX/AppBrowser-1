@@ -115,26 +115,35 @@
          
 - (void)fetchAllInstalledApps
 {
-    Class LSApplicationWorkspaceClass = NSClassFromString(@"LSApplicationWorkspace");
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        Class LSApplicationWorkspaceClass = NSClassFromString(@"LSApplicationWorkspace");
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-    id workspace = [LSApplicationWorkspaceClass performSelector:@selector(defaultWorkspace)];
-    NSArray *appProxys = [workspace performSelector:@selector(allInstalledApplications)];
+        id workspace = [LSApplicationWorkspaceClass performSelector:@selector(defaultWorkspace)];
+        NSArray *appProxys = [workspace performSelector:@selector(allInstalledApplications)];
 #pragma clang diagnostic pop
-    
-    BOOL showSystemApps = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowSystemApps"];
-    
-    self.appInfos = [[[[appProxys
-        rac_sequence]
-        map:^id (id appProxy) {
-            return [[ABSLocalAppInfo alloc] initWithAppProxy:appProxy];
-        }]
-        filter:^BOOL(ABSLocalAppInfo *appInfo) {
-            return showSystemApps ? YES : ![appInfo.applicationIdentifier hasPrefix:@"com.apple"];
-        }]
-        array];
-    
-    [(RACSubject *)self.updatedContentSignal sendNext:nil];
+        
+        BOOL showSystemApps = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowSystemApps"];
+        
+        NSMutableArray *array = [[[[[appProxys
+            rac_sequence]
+            map:^id (id appProxy) {
+                return [[ABSLocalAppInfo alloc] initWithAppProxy:appProxy];
+            }]
+            filter:^BOOL(ABSLocalAppInfo *appInfo) {
+                return showSystemApps ? YES : ![appInfo.applicationIdentifier hasPrefix:@"com.apple"];
+            }]
+            array] mutableCopy];
+        
+        [array sortUsingComparator:^NSComparisonResult(ABSLocalAppInfo *info1, ABSLocalAppInfo *info2) {
+            return [info1.localizedName compare:info2.localizedName];
+        }];
+        
+        self.appInfos = [array copy];
+        
+        [(RACSubject *)self.updatedContentSignal sendNext:nil];
+    });
 }
 
 @end
